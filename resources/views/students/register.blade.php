@@ -14,109 +14,14 @@
     <link rel="stylesheet" href="{{ asset('template/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.css') }}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('template/plugins/toastr/toastr.min.css') }}">
     <!-- Logo for demo purposes -->
     <link rel="shortcut icon" type="" href="{{ asset('template/img/CPSU_L.png') }}">
 
-    <style type="text/css">
-        .bg-greenn{
-            background-color: #04401f;
-            color: #000 !important;
-        }
-        .card{
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
-        }
-        .btn-app2{
-            box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important;
-        }
-        .input-group{
-            -webkit-animation: showSlowlyElement 700ms !important; 
-            animation: showSlowlyElement 700ms !important;
-        }
-        .icheck-primary{
-            -webkit-animation: showSlowlyElement 700ms !important; 
-            animation: showSlowlyElement 700ms !important;
-        }
-        .col-4{
-            -webkit-animation: showSlowlyElement 700ms !important; 
-            animation: showSlowlyElement 700ms !important;
-        }
-        .btn-primary{
-            background-color: #1f5036 !important;
-            border: #1f5036 !important;
-        }
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-color: #5f6f81;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: 100%;
-            /*z-index: -1;*/
-        }
-        .btn-success {
-            background-color: #044011 !important;
-        }
-        .btn-app{
-            border-radius: 3px !important;
-            border: 1px solid #04401f !important;
-            color: #1f5036;
-            box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important;
-        }
-        .btn-app:hover{
-            background-color: #187744;
-            color: #fff;
-            border: #ffc107;
-        }
-        .btn-app.active{
-            background-color: #187744;
-            color: #fff;
-            border: #ffc107;
-        }
-        .btn-app2{
-            border-radius: 3px !important;
-            background-color: ;
-            border: 1px solid #044011 !important;
-            height: 70px !important;
-            margin: 0 0 10px 10px !important;
-            min-width: 80px !important;
-            padding: 25px 5px;
-            color: #1f5036;
-        }
-        
-        .buttonlarge {
-            font-size: 10pt !important;
-        }
-        .btn-app2.clicked {
-            animation: haptic-animation 0.3s ease;
-            color: #000;
-            border: #ffc107;
-        }
-
-        @keyframes haptic-animation {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .center-top {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .text1 {
-            font-family: Bookman Old Style;
-            text-align: center;
-            font-size: 12pt;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('student-style.css') }}">
 </head>
 
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
@@ -177,7 +82,7 @@
 
                         <div class="col-lg-1"></div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="card" id="firstCard">
                                 <div class="card-header">
                                     <h3 class="card-title pt-2">
@@ -194,7 +99,7 @@
                                             <div class="form-row">
                                                 <div class="col-md-12">
                                                     <label><span class="badge badge-default">Student ID Number:</span></label>
-                                                    <input type="text" id="studID_no" name="studID" placeholder="0000-0000-K" class="form-control" autofocus>
+                                                    <input type="text" id="studID_no" name="studID" placeholder="0000-0000-K" class="form-control" placeholder="0000-0000-K" class="form-control" data-widget="control-sidebar" data-controlsidebar-slide="true" autofocus>
                                                 </div>
                                             </div>
                                         </div>
@@ -203,7 +108,7 @@
                                             <div class="form-row">
                                                 <div class="col-md-12">
                                                     <button type="submit" name="btn-submit" class="btn btn-success btn-block">
-                                                        <i class="fas fa-check"></i> <b>OK</b>
+                                                        <i class="fas fa-check"></i> <b>Search</b>
                                                     </button>
                                                 </div>
                                             </div>
@@ -221,8 +126,8 @@
                                     </h3>
                                 </div>
                                 <div class="card-body">
-                                    <form method="post">
-                                        
+                                    <form method="post" action="{{ route('studentCreate') }}">
+                                        @csrf
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
@@ -253,7 +158,7 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
-                                                    <input type="hidden" id="id" name="id" value="" class="form-control">
+                                                    <input type="hidden" id="idx" name="studlist_id" value="" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -271,9 +176,21 @@
                                 </div>
                             </div>
                             <div id="notification"></div>
+                            @if (session('success'))
+                                <div class="alert alert-success" id="success-alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            @if (session('error'))
+                                <div class="alert alert-danger" id="error-alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
                         </div>
 
-                        <div class="col-lg-4">
+                        {{-- <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
                                     @include('partials.numpad_control')
@@ -282,7 +199,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 style="margin-left: -5px;">
-                                        <a href="{{ route('login') }}" class="btn btn-app">
+                                        <a href="{{ route('studlogin') }}" class="btn btn-app">
                                             <i class="fas fa-sign-in"></i> <b>Login</b>
                                         </a>
                                         <a href="{{ route('register') }}" class="btn btn-app active">
@@ -291,11 +208,21 @@
                                     </h5>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2023-2024 <a href="">Campus Wifi</a>.</strong>
+                All rights reserved.
+                <div class="float-right d-none d-sm-inline-block">
+                    <b>Version</b> 3.2.0
+                </div>
+            </footer>
+        <aside class="control-sidebar control-sidebar-dark">
+            @include('students.partials.numpad_control')
+        </aside>
     </div>
 
     <!-- jQuery -->
@@ -308,70 +235,16 @@
     <!-- jquery-validation -->
     <script src="{{ asset('template/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('template/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+    <!-- Toastr -->
+    <script src="{{ asset('template/plugins/toastr/toastr.min.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
-     @include('script.numpad')
-
-<script>
-    function generatePIN() {
-        return Math.floor(1000 + Math.random() * 9000);
-    }
-    function generateLetter() {
-        var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        return letters.charAt(Math.floor(Math.random() * letters.length));
-    }
-    function updateGeneratedPassword() {
-        var generatedPIN = generatePIN();
-        var generatedLetter = generateLetter();
-        var generatedPassword = generatedPIN + generatedLetter;
-
-        $("#password").val(generatedPassword); 
-    }
-    $("#stud_id").on("input", updateGeneratedPassword);
-    updateGeneratedPassword();
-</script>
+    @include('script.numpad')
+    @include('script.register_script')
 
 
-<script>
-$(document).ready(function () {
-    $("#checkStudentForm").submit(function (e) {
-        e.preventDefault();
-        var studID = $("#studID_no").val();
-
-        $.ajax({
-            type: "POST",
-            url: "{{ route('checkStudent') }}",
-            data: {
-                _token: "{{ csrf_token() }}",
-                studID: studID
-            },
-            success: function (response) {
-                if (response.message === 'Student is Enrolled') {
-                    $("#secondCard").css("display", "block");
-                    $("#stud_id").val(response.data.stud_id);
-                    $("#fullname").val(response.data.fullname);
-                    $("#id").val(response.data.id);
-                } else {
-                    $("#secondCard").css("display", "none");
-                    $("#fname").val('');
-                    var notFoundAlert = '<div class="alert alert-danger" role="alert">Student data not found.</div>';
-                    $("#notification").html(notFoundAlert);
-                }
-                var validationAlert = '<div class="alert alert-success" role="alert">' + response.message + '</div>';
-                $("#validation_result").html(validationAlert);
-                $(".alert").delay(2500).fadeOut(3000);
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-                $("#secondCard").css("display", "none");
-                $("#fname").val('');
-                var errorAlert = '<div class="alert alert-danger" role="alert">You\'re not enrolled this semester.</div>';
-                $("#notification").html(errorAlert);
-                $(".alert").delay(2500).fadeOut(5000);
-            }
-        });
-    });
-});
-</script>
 
 </body>
 </html>
+

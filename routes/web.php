@@ -4,6 +4,14 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\StudentMainController;
+
+
+use App\Http\Controllers\LoginAdminAuthController;
+use App\Http\Controllers\AdminMasterController;
+use App\Http\Controllers\StudentListController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +25,22 @@ use App\Http\Controllers\RegisterController;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('students.login');
 });
 
-Route::get('/login',[LoginController::class,'login'])->name('login');
+Route::get('/login',[LoginController::class,'studlogin'])->name('studlogin');
+Route::post('/login',[LoginController::class,'postLogin'])->name('postLogin');
+
 Route::get('/register',[RegisterController::class,'register'])->name('register');
 Route::post('/check-student',[RegisterController::class,'checkStudent'])->name('checkStudent');
+Route::post('/register',[RegisterController::class,'studentCreate'])->name('studentCreate');
+
+Route::group(['middleware'=>['login_auth']],function(){
+    Route::get('/dashboard',[StudentMainController::class,'dashboard'])->name('dashboard');
+    Route::post('/dashboard',[StudentMainController::class,'dashboard'])->name('dashboard');
+
+    //Logout
+    Route::get('/logout',[StudentMainController::class,'logout'])->name('logout');
+});
+
 

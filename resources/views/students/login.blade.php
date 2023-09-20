@@ -14,109 +14,14 @@
     <link rel="stylesheet" href="{{ asset('template/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.css') }}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('template/plugins/toastr/toastr.min.css') }}">
     <!-- Logo for demo purposes -->
     <link rel="shortcut icon" type="" href="{{ asset('template/img/CPSU_L.png') }}">
 
-    <style type="text/css">
-        .bg-greenn{
-            background-color: #04401f;
-            color: #000 !important;
-        }
-        .card{
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
-        }
-        .login-logo{
-            -webkit-animation: showSlowlyElement 700ms !important; 
-            animation: showSlowlyElement 700ms !important;
-        }
-        .input-group{
-            -webkit-animation: showSlowlyElement 700ms !important; 
-            animation: showSlowlyElement 700ms !important;
-        }
-        .icheck-primary{
-            -webkit-animation: showSlowlyElement 700ms !important; 
-            animation: showSlowlyElement 700ms !important;
-        }
-        .col-4{
-            -webkit-animation: showSlowlyElement 700ms !important; 
-            animation: showSlowlyElement 700ms !important;
-        }
-        .btn-primary{
-            background-color: #1f5036 !important;
-            border: #1f5036 !important;
-        }
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-color: #5f6f81;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: 100%;
-            /*z-index: -1;*/
-        }
-        .btn-success {
-            background-color: #044011 !important;
-        }
-        .btn-app{
-            border-radius: 3px !important;
-            border: 1px solid #04401f !important;
-            color: #1f5036;
-        }
-        .btn-app:hover{
-            background-color: #187744;
-            color: #fff;
-            border: #ffc107;
-        }
-        .btn-app.active{
-            background-color: #187744;
-            color: #fff;
-            border: #ffc107;
-        }
-        .btn-app2{
-            border-radius: 3px !important;
-            background-color: ;
-            border: 1px solid #044011 !important;
-            height: 70px !important;
-            margin: 0 0 10px 10px !important;
-            min-width: 80px !important;
-            padding: 25px 5px;
-            color: #1f5036;
-        }
-        
-        .buttonlarge {
-            font-size: 10pt !important;
-        }
-        .btn-app2.clicked {
-            animation: haptic-animation 0.3s ease;
-            color: #000;
-            border: #ffc107;
-        }
-
-        @keyframes haptic-animation {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .center-top {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .text1 {
-            font-family: Bookman Old Style;
-            text-align: center;
-            font-size: 12pt;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('student-style.css') }}">
 </head>
 
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
@@ -177,7 +82,7 @@
 
                         <div class="col-lg-1"></div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title pt-2">
@@ -187,14 +92,26 @@
                                     </h3>
                                 </div>
                                 <div class="card-body">
-                                    <form method="post" action="">
+                                    <form action="{{route('postLogin')}}" method="post">
                                         @csrf
 
+                                        @if(session('error'))
+                                            <div class="alert alert-danger" style="font-size: 12pt;">
+                                                <i class="fas fa-exclamation-triangle "></i> {{session('error')}}
+                                            </div>
+                                        @endif
+
+                                        @if(session('success'))
+                                            <div class="alert alert-success" style="font-size: 10pt;">
+                                            <i class="fas fa-check"></i> {{session('success')}}
+                                            </div>
+                                        @endif
+                                        
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
                                                     <label><span class="badge badge-default">Student ID Number:</span></label>
-                                                    <input type="text" id="studID_no" name="studID" placeholder="0000-0000-K" class="form-control" autofocus>
+                                                    <input type="text" id="studID_no" name="stud_id" placeholder="0000-0000-K" class="form-control" data-widget="control-sidebar" data-slide="true" autofocus>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,8 +119,17 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
-                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block">
-                                                        <i class="fas fa-check"></i> <b>OK</b>
+                                                    <label><span class="badge badge-default">Password:</span></label>
+                                                    <input type="password" id="password" name="password" placeholder="Password" class="form-control" autofocus>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-success btn-block">
+                                                        <i class="fas fa-check"></i> <b>Login</b>
                                                     </button>
                                                 </div>
                                             </div>
@@ -213,7 +139,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-4">
+                        {{-- <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
                                     @include('partials.numpad_control')
@@ -222,7 +148,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 style="margin-left: -5px;">
-                                        <a href="{{ route('login') }}" class="btn btn-app active">
+                                        <a href="{{ route('studlogin') }}" class="btn btn-app active">
                                             <i class="fas fa-sign-in"></i> <b>Login</b>
                                         </a>
                                         <a href="{{ route('register') }}" class="btn btn-app">
@@ -231,11 +157,20 @@
                                     </h5>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
+        <footer class="main-footer">
+            <strong>2023-2024 <a href="">Campus Wifi</a>.</strong>
+            <div class="float-right d-none d-sm-inline-block">
+                {{-- <b>Version</b> 3.2.0 --}}
+            </div>
+        </footer>
+        <aside class="control-sidebar control-sidebar-dark">
+            @include('students.partials.numpad_control')
+        </aside>
     </div>
 
     <!-- jQuery -->
@@ -245,7 +180,24 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('template/dist/js/adminlte.min.js') }}"></script>
 
+    <!-- jquery-validation -->
+    <script src="{{ asset('template/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('template/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+    <!-- Toastr -->
+    <script src="{{ asset('template/plugins/toastr/toastr.min.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
+    <script>
+        document.getElementById("password").addEventListener("focus", function () {
+            currentInput = "password";
+        });
+    </script>
+    
     @include('script.numpad')
+
+
+
 </body>
 </html>
+   

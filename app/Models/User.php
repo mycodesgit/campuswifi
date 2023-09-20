@@ -17,10 +17,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
-        'name',
-        'email',
+        'lname',
+        'fname',
+        'mname',
+        'username',
         'password',
+        'usertype',
     ];
 
     /**
@@ -41,4 +45,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function isAdmin()
+    {
+        return $this->role === 'Administrator';
+    }
 }

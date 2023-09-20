@@ -2,7 +2,13 @@
     background-color: #04401f;
     color: #000 !important;
 }
+.control-sidebar-dark{
+    background-color: gray !important;
+}
 .card{
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
+}
+.btn-block{
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
 }
 .btn-app2{
@@ -35,7 +41,7 @@
     /*z-index: -1;*/
 }
 .btn-success {
-    background-color: #044011 !important;
+    background-color: #04401f !important;
 }
 .btn-app{
     border-radius: 3px !important;
@@ -44,16 +50,16 @@
     box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important;
 }
 .btn-app:hover{
-    background-color: #187744;
+    background-color: #04401f;
     color: #fff;
     border: #ffc107;
 }
 .btn-app.active{
-    background-color: #187744;
+    background-color: #04401f;
     color: #fff;
     border: #ffc107;
 }
-.btn-app2{
+/*.btn-app2{
     border-radius: 3px !important;
     background-color: ;
     border: 1px solid #044011 !important;
@@ -61,6 +67,16 @@
     margin: 0 0 10px 10px !important;
     min-width: 80px !important;
     padding: 25px 5px;
+    color: #1f5036;
+}*/
+.btn-app2{
+    border-radius: 3px !important;
+    background-color: #fff !important;
+    border: 1px solid #fff !important;
+    height: 60px !important;
+    margin: 0 0 10px 10px !important;
+    min-width: 60px !important;
+    padding: 20px 5px;
     color: #1f5036;
 }
 

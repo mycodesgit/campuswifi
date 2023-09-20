@@ -4,21 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Students extends Model
+class Students extends Authenticatable
 {
     use HasFactory;
-    protected $table = 'studentslist';
+    protected $table = 'students';
 
     protected $fillable = [
-        'lname',
-        'fname',
-        'mname',
-        'username',
+        'stud_id',
+        'fullname',
         'password',
-        'campus_id',
-        'role',
-        'course_id',
-        'stud_id'
+        'studlist_id',
+        'vc_id',
     ];
+    public function isStudent()
+    {
+        return $this->role === 'Student';
+    }
 }

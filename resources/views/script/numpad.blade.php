@@ -89,11 +89,13 @@
         inputElement.value = newValue;
     });
 
-    @if(Route::currentRouteName() === 'login')
-        document.getElementById("password").addEventListener("focus", function () {
-            currentInput = "password";
-        });
-    @endif
+    document.getElementById("btn-reset").addEventListener("click", function () {
+        var inputElement = document.getElementById("password");
+        var currentValue = inputElement.value;
+        var newValue = currentValue.substring(0, currentValue.length - 1);
+        inputElement.value = newValue;
+    });
+
 
     document.getElementById("studID_no").addEventListener("focus", function () {
         currentInput = "studID_no";
