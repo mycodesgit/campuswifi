@@ -204,21 +204,18 @@
 
                                                 <div class="form-group">
                                                     <div class="form-row">
-                                                        <div class="col-md-12">
+                                                        <div class="col-md-6">
                                                             <button type="submit" class="btn btn-primary btn-block" style="">
                                                                 <i class="fas fa-check"></i> <b>Login</b>
                                                             </button>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <a href="{{ route('register') }}"  class="btn btn-danger btn-block" style="">
+                                                                <i class="fas fa-plus"></i> <b>Create Account</b>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="social-auth-links text-center mt-1 mb-1">
-                                                    OR
-                                                </div>
-                                                <p class="mb-0 text-center">
-                                                    <a href="{{ route('register') }}" class="text-center" style="color: #000 !important">
-                                                        Create your Account
-                                                    </a>
-                                                </p>
                                             </form>
                                             <div class="coupon-row">
                                             </div>
