@@ -28,7 +28,7 @@ class LoginController extends Controller
     if ($validated) {
         $schlyear = '2024-2025';  // Current school year
         $semester = '1';          // Current semester
-        $stud_id = Auth::guard('students')->user()->stud_id;
+        $stud_id = Auth::guard('students')->user()->id;
 
         // Fetch the specific student record for the given schlyear, semester, and stud_id
         $stud = Students::where('schlyear', $schlyear)
