@@ -24,8 +24,10 @@ class LoginController extends Controller
         ], $request->remember);
 
         if ($validated) {
+            $schlyear = '2024-2025';
+            $semester = '1';
             $stud_id = Auth::guard('students')->user()->id;
-            $stud = Students::find($stud_id);
+            $stud = Students::where('schlyear', $schlyear)->where('semester', $semester)->first($stud_id);
 
             if ($stud->vc_id == null || $stud->vc_id == "no vc") {
                 $voucher = Voucher::where('status', 1)->inRandomOrder()->first();
