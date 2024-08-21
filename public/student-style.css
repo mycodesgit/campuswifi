@@ -1,5 +1,9 @@
+
+.cred {
+    border-radius: 20px;
+}
 .bg-greenn{
-    background-color: #04401f;
+    background-color: #1f5036 ;
     color: #000 !important;
 }
 .control-sidebar-dark{
@@ -9,7 +13,7 @@
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
 }
 .btn-block{
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
+    /*box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;*/
 }
 .btn-app2{
     box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important;
@@ -109,6 +113,7 @@
 }
 .text1 {
     font-family: Bookman Old Style;
-    text-align: center;
-    font-size: 12pt;
+    text-align: center !important;
+    justify-content: center !important;
+    font-size: 10pt;
 }

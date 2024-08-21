@@ -65,14 +65,13 @@
         </a>
     </div>
 </div>
+@if(\Route::currentRouteName() == 'register')
 <hr>
-<div class="ml-1 mr-2 mt-2">
+<div class="ml-1 mr-2 mt-2 mt-12">
     <div class="col-md-12">
-        <a href="{{ route('studlogin') }}" class="btn btn-warning btn-block" style="color: #000;">
-            <i class="fas fa-sign-in"></i> <b>Login</b>
-        </a>
-        <a href="{{ route('register') }}" class="btn btn-info btn-block" style="color: #000;">
-            <i class="fas fa-user-plus"></i> <b>Register</b>
+        <a href="{{ route('studlogin') }}" class="btn btn-primary btn-block" style="color: #fff;">
+            <i class="fas fa-sign-in"></i> <b>Sign In</b>
         </a>
     </div>
 </div>
+@endif

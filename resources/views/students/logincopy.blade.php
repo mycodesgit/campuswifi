@@ -22,25 +22,12 @@
     <link rel="shortcut icon" type="" href="{{ asset('template/img/CPSU_L.png') }}">
 
     <link rel="stylesheet" href="{{ asset('student-style.css') }}">
-    <style>
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-color: #6c9076;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: 100%;
-            /*z-index: -1;*/
-        }
-    </style>
 </head>
 
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
 
     <div class="wrapper">
-        <div id="particles-js"></div>
-        <nav class="main-header navbar navbar-expand-md navbar-light border-bottom-0 bg-greenn">
+        <nav class="main-header navbar navbar-expand-md navbar-light bg-greenn">
             <div class="container-fluid">
                 <a href="" class="navbar-brand" style="color: #fff;font-family: Courier;">
                     CPSU CAMPUS WIFI
@@ -51,7 +38,7 @@
 
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <li class="nav-item">
-                        <a id="v1" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" style="color: #fff">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" style="color: #fff">
                             v1 
                         </a>
                     </li>
@@ -69,30 +56,22 @@
                 <div class="container">
                     <div class="row" style="padding-top: 20px;">
                         <div class="col-lg-3">
-                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
+                            <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title" style="font-size: 12pt">
+                                    <h5 class="card-title" style="font-size: 17pt">
                                         <div class="">
                                             <h3  style="text-align: center;">Vision</h3>
                                             <p class="text1">CPSU as the leading technology-driven multi-disciplinary University by 2030.</p>
                                         </div>
                                     </h5>
-                                </div>
-                            </div>
-                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
-                                <div class="card-body">
-                                    <h5 class="card-title" style="font-size: 12pt">
-                                        <div class="">
+                                    <h5 class="card-title" style="font-size: 17pt">
+                                        <div class=""><hr>
                                             <h3  style="text-align: center;">Mission</h3>
                                             <p class="text1">CPSU is committed to produce competent graduates who can generate and extend leading technologies in multi-disciplinary areas beneficial to the community.</p>
                                         </div>
                                     </h5>
-                                </div>
-                            </div>
-                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
-                                <div class="card-body">
-                                    <h5 class="card-title" style="font-size: 12pt">
-                                        <div class="">
+                                    <h5 class="card-title" style="font-size: 17pt">
+                                        <div class=""><hr>
                                             <h3  style="text-align: center;">Goal</h3>
                                             <p class="text1">To provide efficient, Quality, Technology-driven and Gender-Sensitive Products abd Services.</p>
                                         </div>
@@ -104,14 +83,11 @@
                         <div class="col-lg-1"></div>
 
                         <div class="col-lg-4">
-                            <div class="card" style="border-radius: 20px;">
-                                <div class="">
-                                    <div class="text-center" style="margin-top: -100px">
-                                        <img class="" src="{{ asset('template/img/2438132-removebg-preview.png') }}" width="90%" alt="user" />
-                                    </div>
+                            <div class="card">
+                                <div class="card-header">
                                     <h3 class="card-title pt-2">
                                         <p class="login-box-msg" style="font-family: Courier;font-weight: bolder;font-size: 13pt;">
-                                            Login here to generate Wi-Fi Voucher
+                                            Login here to generate wifi voucher
                                         </p>
                                     </h3>
                                 </div>
@@ -131,20 +107,11 @@
                                             </div>
                                         @endif
                                         
-                                        <div class="input-group mb-3">
-                                            <input type="text" id="studID_no" name="stud_id" placeholder="Enter Student ID Number" class="form-control" autofocus="" required="">
-                                            <div class="input-group-append" style="background-color: #fff; border-radius: 5px 5px 5px 5px">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-id-card"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <input type="password" id="password" name="password" placeholder="Password" class="form-control" required="">
-                                            <div class="input-group-append" style="background-color: #fff; border-radius: 5px 5px 5px 5px">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-lock"></span>
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <label><span class="badge badge-default">Student ID Number:</span></label>
+                                                    <input type="text" id="studID_no" name="stud_id" placeholder="0000-0000-K" class="form-control" data-widget="control-sidebar" data-slide="true" autofocus>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,20 +119,21 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
-                                                    <button type="submit" class="btn btn-primary btn-block" style="">
+                                                    <label><span class="badge badge-default">Password:</span></label>
+                                                    <input type="password" id="password" name="password" placeholder="Password" class="form-control" autofocus>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-success btn-block">
                                                         <i class="fas fa-check"></i> <b>Login</b>
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="social-auth-links text-center mt-1 mb-1">
-                                            OR
-                                        </div>
-                                        <p class="mb-0 text-center">
-                                            <a href="{{ route('register') }}" class="text-center" style="color: #000 !important">
-                                                Create your Account
-                                            </a>
-                                        </p>
                                     </form>
                                 </div>
                             </div>
@@ -200,13 +168,11 @@
                 {{-- <b>Version</b> 3.2.0 --}}
             </div>
         </footer>
-        <aside class="control-sidebar control-sidebar-dark" style="border-radius: 20px; background-color: rgba(255, 255, 255, 0.8) !important;">
+        <aside class="control-sidebar control-sidebar-dark">
             @include('students.partials.numpad_control')
         </aside>
     </div>
 
-    <script src="{{ asset('particles/particles.js') }}"></script>
-    <script src="{{ asset('particles/app.js') }}"></script>
     <!-- jQuery -->
     <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
@@ -230,11 +196,7 @@
     
     @include('script.numpad')
 
-    <script>
-        $(document).ready(function(){
-            $('#v1').click();
-        });
-    </script>
+
 
 </body>
 </html>

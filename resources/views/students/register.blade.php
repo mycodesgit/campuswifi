@@ -22,12 +22,26 @@
     <link rel="shortcut icon" type="" href="{{ asset('template/img/CPSU_L.png') }}">
 
     <link rel="stylesheet" href="{{ asset('student-style.css') }}">
+
+    <style>
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #6c9076;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 100%;
+            /*z-index: -1;*/
+        }
+    </style>
 </head>
 
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
 
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand-md navbar-light bg-greenn">
+        <div id="particles-js"></div>
+        <nav class="main-header navbar navbar-expand-md border-bottom-0 bg-greenn">
             <div class="container-fluid">
                 <a href="" class="navbar-brand" style="color: #fff;font-family: Courier;">
                     CPSU CAMPUS WIFI
@@ -38,7 +52,7 @@
 
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" style="color: #fff">
+                        <a id="v1" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" style="color: #fff">
                             v1 
                         </a>
                     </li>
@@ -56,7 +70,7 @@
                 <div class="container">
                     <div class="row" style="padding-top: 20px;">
                         <div class="col-lg-3">
-                            <div class="card">
+                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 17pt">
                                         <div class="">
@@ -64,14 +78,22 @@
                                             <p class="text1">CPSU as the leading technology-driven multi-disciplinary University by 2030.</p>
                                         </div>
                                     </h5>
+                                </div>
+                            </div>
+                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
+                                <div class="card-body">
                                     <h5 class="card-title" style="font-size: 17pt">
-                                        <div class=""><hr>
+                                        <div class="">
                                             <h3  style="text-align: center;">Mission</h3>
                                             <p class="text1">CPSU is committed to produce competent graduates who can generate and extend leading technologies in multi-disciplinary areas beneficial to the community.</p>
                                         </div>
                                     </h5>
+                                </div>
+                            </div>
+                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
+                                <div class="card-body">
                                     <h5 class="card-title" style="font-size: 17pt">
-                                        <div class=""><hr>
+                                        <div class="">
                                             <h3  style="text-align: center;">Goal</h3>
                                             <p class="text1">To provide efficient, Quality, Technology-driven and Gender-Sensitive Products abd Services.</p>
                                         </div>
@@ -83,7 +105,7 @@
                         <div class="col-lg-1"></div>
 
                         <div class="col-lg-4">
-                            <div class="card" id="firstCard">
+                            <div class="card" id="firstCard" style="border-radius: 20px;">
                                 <div class="card-header">
                                     <h3 class="card-title pt-2">
                                         <p class="login-box-msg" style="font-family: Courier;font-weight: bolder;font-size: 13pt;">
@@ -99,7 +121,7 @@
                                             <div class="form-row">
                                                 <div class="col-md-12">
                                                     <label><span class="badge badge-default">Student ID Number:</span></label>
-                                                    <input type="text" id="studID_no" name="studID" placeholder="0000-0000-K" class="form-control" placeholder="0000-0000-K" class="form-control" data-widget="control-sidebar" data-controlsidebar-slide="true" autofocus>
+                                                    <input type="text" id="studID_no" name="studID" placeholder="0000-0000-K" class="form-control" placeholder="0000-0000-K" class="form-control" autofocus>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +129,7 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
-                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block">
+                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block" style="border-radius: 20px">
                                                         <i class="fas fa-check"></i> <b>Search</b>
                                                     </button>
                                                 </div>
@@ -166,7 +188,7 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
-                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block">
+                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block" style="border-radius: 20px">
                                                         <i class="fas fa-check"></i> <b>Register</b>
                                                     </button>
                                                 </div>
@@ -187,44 +209,24 @@
                                     {{ session('error') }}
                                 </div>
                             @endif
-
                         </div>
-
-                        {{-- <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    @include('partials.numpad_control')
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 style="margin-left: -5px;">
-                                        <a href="{{ route('studlogin') }}" class="btn btn-app">
-                                            <i class="fas fa-sign-in"></i> <b>Login</b>
-                                        </a>
-                                        <a href="{{ route('register') }}" class="btn btn-app active">
-                                            <i class="fas fa-user-plus"></i> <b>Register</b>
-                                        </a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
         <footer class="main-footer">
-            <strong>Copyright &copy; 2023-2024 <a href="">Campus Wifi</a>.</strong>
-                All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
-                    <b>Version</b> 3.2.0
-                </div>
-            </footer>
-        <aside class="control-sidebar control-sidebar-dark">
+            <strong>Developed and Managed By:</strong> Management Information System Office
+            <div class="float-right d-none d-sm-inline-block">
+                {{-- <b>Version</b> 3.2.0 --}}
+            </div>
+        </footer>
+        <aside class="control-sidebar control-sidebar-light control-sidebar-open" style="border-radius: 20px; background-color: rgba(255, 255, 255, 0.8) !important;">
             @include('students.partials.numpad_control')
         </aside>
     </div>
 
+    <script src="{{ asset('particles/particles.js') }}"></script>
+    <script src="{{ asset('particles/app.js') }}"></script>
     <!-- jQuery -->
     <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
@@ -243,8 +245,12 @@
     @include('script.numpad')
     @include('script.register_script')
 
-
+    <script>
+        $(document).ready(function(){
+            $('#v1').click();
+        });
+    </script>
 
 </body>
 </html>
-
+   

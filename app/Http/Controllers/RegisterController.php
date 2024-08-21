@@ -33,7 +33,9 @@ class RegisterController extends Controller
             ]);
 
             $studID = $request->input('stud_id');
-            $existingID = Students::where('stud_id', $studID)->first();
+            $schlyear = '2024-2025';
+            $semester = '1';
+            $existingID = Students::where('stud_id', $studID)->where('schlyear', $schlyear)->where('semester', $semester)->first();
 
             if ($existingID) {
                 return redirect()->route('register')->with('error', 'Student ID No. already exists!');
