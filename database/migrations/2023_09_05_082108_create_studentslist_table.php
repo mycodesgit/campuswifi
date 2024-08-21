@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('fullname');
             $table->string('course');
             $table->string('yearlevel');
+            $table->string('schlyear');
+            $table->string('semester');
             $table->timestamps();
         });
     }

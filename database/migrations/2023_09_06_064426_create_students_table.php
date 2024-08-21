@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('studlist_id');
             $table->string('role');
+            $table->string('schlyear');
+            $table->string('semester');
             $table->timestamps();
         });
     }

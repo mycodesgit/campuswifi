@@ -17,6 +17,8 @@ class Students extends Authenticatable
         'password',
         'studlist_id',
         'vc_id',
+        'schlyear',
+        'semester'
     ];
     public function isStudent()
     {
