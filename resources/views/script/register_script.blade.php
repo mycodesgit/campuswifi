@@ -11,7 +11,7 @@
         var generatedLetter = generateLetter();
         var generatedPassword = generatedPIN + generatedLetter;
 
-        $("#password").val(generatedPassword); 
+        $("#passwordreg").val(generatedPassword); 
     }
     $("#stud_id").on("input", updateGeneratedPassword);
     updateGeneratedPassword();

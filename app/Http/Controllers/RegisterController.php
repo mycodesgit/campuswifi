@@ -49,7 +49,7 @@ class RegisterController extends Controller
                     'studlist_id' => $request->input('studlist_id'),
                 ]);
 
-                return redirect()->route('register')->with('success', 'Student ID register successfully!');
+                return redirect()->route('studlogin')->with('success', 'Student ID register successfully!');
             } catch (\Exception $e) {
                 return redirect()->route()->with('error', 'Failed to register!');
             }

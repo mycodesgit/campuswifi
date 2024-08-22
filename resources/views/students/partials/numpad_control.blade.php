@@ -68,7 +68,7 @@
         
     </div>
 </div>
-@if(\Route::currentRouteName() == 'register')
+{{-- @if(\Route::currentRouteName() == 'register')
 <hr>
 <div class="ml-1 mr-2 mt-2 mt-12">
     <div class="col-md-12">
@@ -77,7 +77,7 @@
         </a>
     </div>
 </div>
-@endif
+@endif --}}
 {{-- <div class="mt-4" style="text-align: center;">
     <div class="col-md-12">
         <a id="btn-1" class="btn btn-app2" style="background-color: #6c757d; color: #000;">

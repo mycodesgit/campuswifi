@@ -23,12 +23,95 @@
 
     <link rel="stylesheet" href="{{ asset('student-style.css') }}">
 
-    <style>
+    <style type="text/css">
+        .voucher {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .code {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .text {
+            font-size: 18px;
+            color: #555;
+        }
+        .coupon-card{
+            background: linear-gradient(135deg, #ffc107, #04401f);
+            color: #fff;
+            text-align: center;
+            padding: 40px 80px;
+            border-radius: 15px;
+            box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15);
+            position: relative;
+
+        }
+        .logo{
+            width: 100px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+
+        }
+        .coupon-card h3{
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 40px;
+
+        }
+        .coupon-card p{
+            font-size: 15px;
+
+        }
+        .coupon-row{
+            display: flex;
+            align-items: center;
+            margin: 25px auto;
+            width: fit-content;
+
+        }
+       #cpnCode {
+            border: 2px dashed #fff; 
+            padding: 10px 20px;
+            font-weight: bolder;
+            font-size: 20pt;
+            display: inline-block; 
+        }
+
+        #cpnBtn{
+            border: 1px solid #fff;
+            background: #fff;
+            padding: 10px 20px;
+            color: #7158fe;
+            cursor: pointer;
+        }
+        .circle1, .circle2{
+            background: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+        }
+        .circle1{
+            left: -25px;
+        }
+        .circle2{
+            right: -25px;
+        }
         #particles-js {
             position: fixed;
             width: 100%;
             height: 100%;
-            background-color: #6c9076;
+            background-image: url('{{ asset('template/img/bg-campuswifi.png') }}');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: 100%;
@@ -41,19 +124,19 @@
 
     <div class="wrapper">
         <div id="particles-js"></div>
-        <nav class="main-header navbar navbar-expand-md border-bottom-0 bg-greenn">
+        <nav class="main-header navbar navbar-expand-md border-bottom-0" style="background-color: #134c2c">
             <div class="container-fluid">
                 <a href="" class="navbar-brand" style="color: #fff;font-family: Courier;">
                     CPSU CAMPUS WIFI
                 </a>
                 <div class="" style="z-index: 999">
-                    <img src="{{ asset('template/img/CPSU_L.png') }}" style="width:80px;" class="center-top">
+                    {{-- <img src="{{ asset('template/img/CPSU_L.png') }}" style="width:80px;" class="center-top"> --}}
                 </div>
 
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <li class="nav-item">
-                        <a id="v1" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" style="color: #fff">
-                            v1 
+                        <a class="nav-link" href="{{ route('studlogin') }}" role="button" style="color: #fff">
+                            <i class="fas fa-sign-out"></i> Back to Login Page 
                         </a>
                     </li>
                 </ul>
@@ -67,162 +150,122 @@
                 </div>
             </div>
             <div class="content">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row" style="padding-top: 20px;">
-                        <div class="col-lg-3">
-                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
-                                <div class="card-body">
-                                    <h5 class="card-title" style="font-size: 17pt">
-                                        <div class="">
-                                            <h3  style="text-align: center;">Vision</h3>
-                                            <p class="text1">CPSU as the leading technology-driven multi-disciplinary University by 2030.</p>
-                                        </div>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
-                                <div class="card-body">
-                                    <h5 class="card-title" style="font-size: 17pt">
-                                        <div class="">
-                                            <h3  style="text-align: center;">Mission</h3>
-                                            <p class="text1">CPSU is committed to produce competent graduates who can generate and extend leading technologies in multi-disciplinary areas beneficial to the community.</p>
-                                        </div>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="card" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2) !important; background-color: rgba(255, 255, 255, 0.8) !important;">
-                                <div class="card-body">
-                                    <h5 class="card-title" style="font-size: 17pt">
-                                        <div class="">
-                                            <h3  style="text-align: center;">Goal</h3>
-                                            <p class="text1">To provide efficient, Quality, Technology-driven and Gender-Sensitive Products abd Services.</p>
-                                        </div>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-lg-3"></div>
 
                         <div class="col-lg-1"></div>
+                        <div class="col-lg-4"></div>
 
                         <div class="col-lg-4">
-                            <div class="card" id="firstCard" style="border-radius: 20px;">
-                                <div class="card-header">
-                                    <h3 class="card-title pt-2">
-                                        <p class="login-box-msg" style="font-family: Courier;font-weight: bolder;font-size: 13pt;">
-                                            <b style="color: red;">Step 1:</b><br> Search Student ID Number here
-                                        </p>
-                                    </h3>
-                                </div>
+                            <div class="card" style="background-color: #a7bca7 !important; border-radius: 10px !important;"> 
                                 <div class="card-body">
-                                    <form method="post" action="{{ route('checkStudent') }}" id="checkStudentForm">
-                                        @csrf
+                                    <div class="container">
+                                        <div class="">
+                                            <div class="" id="firstCard" style="border-radius: 20px;">
+                                                <div class="card-header">
+                                                    <h3 class="card-title pt-2">
+                                                        <p class="login-box-msg" style="font-family: Courier;font-weight: bolder;font-size: 13pt;">
+                                                            <b style="color: red;">Step 1:</b><br> Search Student ID Number here
+                                                        </p>
+                                                    </h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form method="post" action="{{ route('checkStudent') }}" id="checkStudentForm">
+                                                        @csrf
 
-                                        <div class="form-group">
-                                            <div class="form-row">
-                                                <div class="col-md-12">
-                                                    <label><span class="badge badge-default">Student ID Number:</span></label>
-                                                    <input type="text" id="studID_no" name="studID" placeholder="0000-0000-K" class="form-control" placeholder="0000-0000-K" class="form-control" autofocus>
+                                                        <div class="form-group">
+                                                            <div class="form-row">
+                                                                <div class="col-md-12">
+                                                                    <label><span class="badge badge-default">Student ID Number:</span></label>
+                                                                    <input type="text" id="studID_no" name="studID" placeholder="0000-0000-K" class="form-control" placeholder="0000-0000-K" class="form-control" autofocus>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="form-row">
+                                                                <div class="col-md-12">
+                                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block" style="border-radius: 20px">
+                                                                        <i class="fas fa-check"></i> <b>Search</b>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <div class="form-row">
-                                                <div class="col-md-12">
-                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block" style="border-radius: 20px">
-                                                        <i class="fas fa-check"></i> <b>Search</b>
-                                                    </button>
+                                            <div class="" id="secondCard" style="display: none;">
+                                                <div class="card-header">
+                                                    <h3 class="card-title pt-2">
+                                                        <p class="login-box-msg" style="font-family: Courier;font-weight: bolder;font-size: 13pt;">
+                                                            <b style="color: red;">Step 2:</b><br> Register Your Data
+                                                        </p>
+                                                    </h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form method="post" action="{{ route('studentCreate') }}">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <div class="form-row">
+                                                                <div class="col-md-12">
+                                                                    <label><span class="badge badge-default">Student ID Number:</span></label>
+                                                                    <input type="text" id="stud_id" name="stud_id" value="" placeholder="0000-0000-K" class="form-control" readonly="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="form-row">
+                                                                <div class="col-md-12">
+                                                                    <label><span class="badge badge-default">Fullname:</span></label>
+                                                                    <input type="text" id="fullname" name="fullname" value="" class="form-control" readonly="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="form-row">
+                                                                <div class="col-md-12">
+                                                                    <label><span class="badge badge-default">Generated Password:</span></label>
+                                                                    <input type="text" id="passwordreg" name="password" value="" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="form-row">
+                                                                <div class="col-md-12">
+                                                                    <input type="hidden" id="idx" name="studlist_id" value="" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="form-row">
+                                                                <div class="col-md-12">
+                                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block" style="border-radius: 20px">
+                                                                        <i class="fas fa-check"></i> <b>Register</b>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
+                                            <div class="coupon-row">
+                                            </div>
+                                            @include('students.partials.numpad_control')
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="card" id="secondCard" style="display: none;">
-                                <div class="card-header">
-                                    <h3 class="card-title pt-2">
-                                        <p class="login-box-msg" style="font-family: Courier;font-weight: bolder;font-size: 13pt;">
-                                            <b style="color: red;">Step 2:</b><br> Register Your Data
-                                        </p>
-                                    </h3>
-                                </div>
-                                <div class="card-body">
-                                    <form method="post" action="{{ route('studentCreate') }}">
-                                        @csrf
-                                        <div class="form-group">
-                                            <div class="form-row">
-                                                <div class="col-md-12">
-                                                    <label><span class="badge badge-default">Student ID Number:</span></label>
-                                                    <input type="text" id="stud_id" name="stud_id" value="" placeholder="0000-0000-K" class="form-control" readonly="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="form-row">
-                                                <div class="col-md-12">
-                                                    <label><span class="badge badge-default">Fullname:</span></label>
-                                                    <input type="text" id="fullname" name="fullname" value="" class="form-control" readonly="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="form-row">
-                                                <div class="col-md-12">
-                                                    <label><span class="badge badge-default">Generated Password:</span></label>
-                                                    <input type="text" id="password" name="password" value="" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="form-row">
-                                                <div class="col-md-12">
-                                                    <input type="hidden" id="idx" name="studlist_id" value="" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="form-row">
-                                                <div class="col-md-12">
-                                                    <button type="submit" name="btn-submit" class="btn btn-success btn-block" style="border-radius: 20px">
-                                                        <i class="fas fa-check"></i> <b>Register</b>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div id="notification"></div>
-                            @if (session('success'))
-                                <div class="alert alert-success" id="success-alert">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-
-                            @if (session('error'))
-                                <div class="alert alert-danger" id="error-alert">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="main-footer">
-            <strong>Developed and Managed By:</strong> Management Information System Office
-            <div class="float-right d-none d-sm-inline-block">
-                {{-- <b>Version</b> 3.2.0 --}}
-            </div>
-        </footer>
-        <aside class="control-sidebar control-sidebar-light control-sidebar-open" style="border-radius: 20px; background-color: rgba(255, 255, 255, 0.8) !important;">
-            @include('students.partials.numpad_control')
-        </aside>
     </div>
 
     <script src="{{ asset('particles/particles.js') }}"></script>
@@ -246,11 +289,35 @@
     @include('script.register_script')
 
     <script>
+        @if(Session::has('success'))
+            toastr.options = {
+                "closeButton":true,
+                "progressBar":true,
+                'positionClass': 'toast-bottom-right'
+            }
+            toastr.success("{{ session('success') }}")
+        @endif
+        @if(Session::has('error'))
+            toastr.options = {
+                "closeButton":true,
+                "progressBar":true,
+                'positionClass': 'toast-bottom-right'
+            }
+            toastr.error("{{ session('error') }}")
+        @endif
+    </script>
+
+    <script>
+        document.getElementById("password").addEventListener("focus", function () {
+            currentInput = "password";
+        });
+    </script>
+
+    <script>
         $(document).ready(function(){
             $('#v1').click();
         });
     </script>
-
 </body>
 </html>
    

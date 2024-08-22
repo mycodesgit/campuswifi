@@ -171,18 +171,6 @@
                                             </div>
                                             <form action="{{route('postLogin')}}" method="post">
                                                 @csrf
-
-                                                @if(session('error'))
-                                                    <div class="alert alert-danger">
-                                                        <i class="fas fa-exclamation-triangle"></i> {{session('error')}}
-                                                    </div>
-                                                @endif
-
-                                                @if(session('success'))
-                                                    <div class="alert alert-success">
-                                                    <i class="fas fa-check"></i> {{session('success')}}
-                                                    </div>
-                                                @endif
                                                 
                                                 <div class="input-group mb-3">
                                                     <input type="text" id="studID_no" name="stud_id" placeholder="Enter Student ID Number" class="form-control form-control-lg" autofocus="" required="">
@@ -210,7 +198,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <a href="{{ route('register') }}"  class="btn btn-danger btn-block" style="">
+                                                            <a href="{{ route('register') }}" class="btn btn-danger btn-block">
                                                                 <i class="fas fa-plus"></i> <b>Create Account</b>
                                                             </a>
                                                         </div>
@@ -249,6 +237,27 @@
     <script src="{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
     @include('script.numpad')
+    @include('script.register_script')
+
+    <script>
+        @if(Session::has('success'))
+            toastr.options = {
+                "closeButton":true,
+                "progressBar":true,
+                'positionClass': 'toast-bottom-right'
+            }
+            toastr.success("{{ session('success') }}")
+        @endif
+        @if(Session::has('error'))
+            toastr.options = {
+                "closeButton":true,
+                "progressBar":true,
+                'positionClass': 'toast-bottom-right'
+            }
+            toastr.error("{{ session('error') }}")
+        @endif
+    </script>
+
     <script>
         document.getElementById("password").addEventListener("focus", function () {
             currentInput = "password";
