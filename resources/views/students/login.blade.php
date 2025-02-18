@@ -136,8 +136,20 @@
             transition: transform 0.2s;
         }
 
-        .key-btn:hover {
-            transform: translateY(-5px);
+        .key-btn.clicked {
+            animation: haptic-animation 0.3s ease !important;
+        }
+
+        @keyframes haptic-animation {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         /* Control Buttons (Backspace & Clear) */
@@ -205,7 +217,7 @@
                         </div>
                         <div class="input-group mb-5 d-flex justify-content-between">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="formCheck">
+                                <input type="checkbox" class="form-check-input" id="formCheck" onclick="myFunction()">
                                 <label for="formCheck" class="form-check-label text-secondary"><small>Show Password</small></label>
                             </div>
                             <div class="forgot">
@@ -330,6 +342,60 @@
                 }
             });
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.key-btn');
+        
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Add the 'clicked' class
+                    button.classList.add('clicked');
+        
+                    // Remove the class after the animation duration to allow re-click
+                    setTimeout(() => {
+                        button.classList.remove('clicked');
+                    }, 300); // Duration matches the animation time
+                });
+            });
+        });
+
+        function myFunction() {
+            var x = document.getElementById("studentPassInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
     </script>
+
+    <script>
+        // Set the inactivity timeout in milliseconds (2 seconds)
+        const inactivityTime = 12000;
+
+        // Function to redirect to the target URL
+        function redirectToHome() {
+            window.location.href = 'http://localhost/kioskallinone-app/public/';
+        }
+
+        // Initialize a timeout variable
+        let inactivityTimer;
+
+        // Reset the inactivity timer
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(redirectToHome, inactivityTime);
+        }
+
+        // Attach event listeners for user interaction
+        document.addEventListener('mousemove', resetInactivityTimer);
+        document.addEventListener('keydown', resetInactivityTimer);
+        document.addEventListener('click', resetInactivityTimer);
+        document.addEventListener('touchstart', resetInactivityTimer);
+
+        // Start the timer when the page loads
+        window.onload = resetInactivityTimer;
+    </script>
+
 </body>
 </html>
