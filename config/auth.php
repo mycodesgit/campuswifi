@@ -41,9 +41,9 @@ return [
             'provider' => 'users',
         ],
 
-        'students' => [
+        'kioskstudent' => [
             'driver' => 'session',
-            'provider' => 'students',
+            'provider' => 'kioskstudent',
         ],
     ],
 
@@ -70,9 +70,9 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'students' => [
+        'kioskstudent' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Students::class,
+            'model' => App\Models\EnrollmentDB\KioskUser::class,
         ],
     ],
 

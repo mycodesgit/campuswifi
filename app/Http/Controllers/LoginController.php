@@ -5,48 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Students;
-use App\Models\Voucher;
+use Illuminate\Support\Str;
+
+// use App\Models\EnrollmentDB\KioskUser;
+// use App\Models\EnrollmentDB\StudEnrolmnentHistory;
+// use App\Models\EnrollmentDB\Student;
 
 class LoginController extends Controller
 {
     public function studlogin() {
         return view ('students.login');
     }
-    protected function guard() {
-        return auth('students');
-    }
 
-    public function postLogin(Request $request){
-        $validated = $this->guard()->attempt([
-            'stud_id' => $request->stud_id,
+    public function postLogin(Request $request)
+    {
+        $request->validate([
+            'studid' => 'required',
+            'password' => 'required',
+        ]);
+
+        $validatedStudent = auth()->guard('kioskstudent')->attempt([
+            'studid' => $request->studid,
             'password' => $request->password,
-        ], $request->remember);
+        ]);
 
-        if ($validated) {
-            $stud_id = Auth::guard('students')->user()->id;
-            $stud = Students::find($stud_id);
-
-            if ($stud->vc_id == null || $stud->vc_id == "no vc") {
-                $voucher = Voucher::where('status', 1)->inRandomOrder()->first();
-
-                if ($voucher) {
-                    $vcidgen = $voucher->id;
-
-                    $stud->update(['vc_id' => $vcidgen]);
-                    $voucher->update(['status' => 0]);
-                } else {
-                    $vcidgen = "no vc";
-                    $stud->update(['vc_id' => $vcidgen]);
-                }
-            } else {
-                $vcgen = "already has a voucher";
-            }
-
-            return redirect()->route('dashboard')->with('success', 'Login Successfully');
-        } else {
+        if ($validatedStudent) {
+            return redirect()->route('dashboard')->with('success', 'You have successfully logged in.');
+        } 
+        else {
             return redirect()->back()->with('error', 'Invalid Credentials');
         }
-
     }
 }

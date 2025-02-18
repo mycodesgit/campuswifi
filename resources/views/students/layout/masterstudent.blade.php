@@ -194,38 +194,34 @@
                                 <div class="card-header">
                                     <h3 class="card-title pt-2">
                                         <p class="login-box-msg" style="font-family: Courier;font-weight: bolder;font-size: 14pt;">
-                                            <b style="color: #04401f">Welcome:</b> {{ auth()->guard('students')->user()->fullname }}
+                                            <b style="color: #04401f">Welcome:</b> 
+                                                {{ Auth::guard('kioskstudent')->user()->student->fname }} 
+                                                {{ substr(Auth::guard('kioskstudent')->user()->student->mname, 0, 1) }}. 
+                                                {{ Auth::guard('kioskstudent')->user()->student->lname }}
                                         </p>
                                     </h3>
                                 </div>
 
                                 <div class="card-body">
                                     <div class="container">
-                                        <div class="coupon-card">
-                                            <img src="{{ asset('template/img/wifi.png') }}" class="logo">
-                                            @if(!isset($voucher))
-                                                <h4>Ops! Sorry,<br>No Voucher Code Available</h4>
+                                        <div id="voucher-section">
+                                            @if(!isset($studvouch))
+                                            <button class="btn btn-success btn-block" id="generateVoucherBtn">Generate Voucher</button>
                                             @else
-                                                <h4>This is your voucher Code.<br>Serve as username to login portal.</h4>
-                                            @endif
-                                            <div class="coupon-row">
-                                                @if(!isset($voucher))
-                                                    <span id="cpnCode" style="color: black;">No voucher code available</span>
-                                                @else
-                                                    <span id="cpnCode" style="color: black;">{{ $voucher->voucher_code }}</span>
-                                                @endif
+                                            <div class="coupon-card">
+                                                <img src="{{ asset('template/img/wifi.png') }}" class="logo">
+                                                <h4>This is your voucher Code.<br>Use this as your username to login.</h4>
+                                                <div class="coupon-row">
+                                                    <span id="cpnCode" style="color: black;">{{ $studvouch->voucher_code }}</span>
+                                                </div>
+                                                <p>Total Time: 30 Hours per day in this Semester</p>
+                                                <div class="circle1"></div>
+                                                <div class="circle2"></div>
                                             </div>
-
-                                            @if(!isset($voucher))
-                                                <p>Total Time: 0 Hours</p>
-                                            @else
-                                                <p>Total Time: 16 Hours</p>
                                             @endif
-                                            <div class="circle1"></div>
-                                            <div class="circle2"></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -251,10 +247,66 @@
     <!-- SweetAlert2 -->
     <script src="{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
-    @include('script.numpad')
+    <script>
+        document.getElementById('generateVoucherBtn').addEventListener('click', function () {
+            fetch("{{ route('generateVoucher') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.voucher_code) {
+                    document.getElementById('voucher-section').innerHTML = `
+                        <div class="coupon-card">
+                            <img src="{{ asset('template/img/wifi.png') }}" class="logo">
+                            <h4>This is your voucher Code.<br>Use this as your username to login.</h4>
+                            <div class="coupon-row">
+                                <span id="cpnCode" style="color: black;">${data.voucher_code}</span>
+                            </div>
+                            <p>Total Time: 30 Hours per day in this Semester</p>
+                            <div class="circle1"></div>
+                            <div class="circle2"></div>
+                        </div>`;
+                    // Show success message with Swal.fire
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Voucher Generated!',
+                        // text: `Your voucher code: ${data.voucher_code}`,
+                        confirmButtonColor: '#28a745',
+                        timer: 5000
+                    });
 
-
-
+                } else if (data.error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to Generate Voucher',
+                        text: data.error,
+                        confirmButtonColor: '#dc3545',
+                        timer: 5000
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Network Error',
+                    text: 'Failed to connect to the server. Please try again.',
+                    confirmButtonColor: '#dc3545',
+                    timer: 5000
+                });
+            });
+        });
+    </script>        
 </body>
 </html>
    

@@ -24,20 +24,24 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('students.login');
+Route::group(['middleware'=>['guest']],function(){
+    Route::get('/', function () {
+        return view('students.login');
+    });
+
+    Route::get('/login',[LoginController::class,'studlogin'])->name('studlogin');
+    Route::post('/login',[LoginController::class,'postLogin'])->name('postLogin');
+
+    Route::get('/register',[RegisterController::class,'register'])->name('register');
+    Route::post('/check-student',[RegisterController::class,'checkStudent'])->name('checkStudent');
+    Route::post('/register',[RegisterController::class,'studentCreate'])->name('studentCreate');
 });
-
-Route::get('/login',[LoginController::class,'studlogin'])->name('studlogin');
-Route::post('/login',[LoginController::class,'postLogin'])->name('postLogin');
-
-Route::get('/register',[RegisterController::class,'register'])->name('register');
-Route::post('/check-student',[RegisterController::class,'checkStudent'])->name('checkStudent');
-Route::post('/register',[RegisterController::class,'studentCreate'])->name('studentCreate');
 
 Route::group(['middleware'=>['login_auth']],function(){
     Route::get('/dashboard',[StudentMainController::class,'dashboard'])->name('dashboard');
     Route::post('/dashboard',[StudentMainController::class,'dashboard'])->name('dashboard');
+
+    Route::post('/generate',[StudentMainController::class,'generateVoucher'])->name('generateVoucher');
 
     //Logout
     Route::get('/logout',[StudentMainController::class,'logout'])->name('logout');

@@ -1,274 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>CPSU | CAMPUS WIFI</title>
+    <title>CPSU Campus Wi-Fi - Login</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="style.css"> --}}
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('template/plugins/fontawesome-free-v6/css/all.min.css')}}">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="{{ asset('template/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.css') }}">
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="{{ asset('template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('template/plugins/toastr/toastr.min.css') }}">
-    <!-- Logo for demo purposes -->
+    <!-- Logo -->
     <link rel="shortcut icon" type="" href="{{ asset('template/img/CPSU_L.png') }}">
 
-    <link rel="stylesheet" href="{{ asset('student-style.css') }}">
-
     <style type="text/css">
-        .voucher {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            text-align: center;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+        body{
+            font-family: 'Poppins', sans-serif;
+            background: #ececec;
         }
 
-        .code {
-            font-size: 36px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
+        /*------------ Login container ------------*/
+
+        .box-area{
+            width: 930px;
         }
 
-        .text {
-            font-size: 18px;
-            color: #555;
-        }
-        .coupon-card{
-            background: linear-gradient(135deg, #ffc107, #04401f);
-            color: #fff;
-            text-align: center;
-            padding: 40px 80px;
-            border-radius: 15px;
-            box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15);
-            position: relative;
+        /*------------ Right box ------------*/
 
-        }
-        .logo{
-            width: 100px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-
-        }
-        .coupon-card h3{
-            font-size: 28px;
-            font-weight: 400;
-            line-height: 40px;
-
-        }
-        .coupon-card p{
-            font-size: 15px;
-
-        }
-        .coupon-row{
-            display: flex;
-            align-items: center;
-            margin: 25px auto;
-            width: fit-content;
-
-        }
-       #cpnCode {
-            border: 2px dashed #fff; 
-            padding: 10px 20px;
-            font-weight: bolder;
-            font-size: 20pt;
-            display: inline-block; 
+        .right-box{
+            padding: 40px 30px 40px 40px;
         }
 
-        #cpnBtn{
-            border: 1px solid #fff;
-            background: #fff;
-            padding: 10px 20px;
-            color: #7158fe;
-            cursor: pointer;
+        /*------------ Custom Placeholder ------------*/
+
+        ::placeholder{
+            font-size: 16px;
         }
-        .circle1, .circle2{
-            background: #ffffff;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+
+        .rounded-4{
+            border-radius: 20px;
+        }
+        .rounded-5{
+            border-radius: 30px;
+        }
+
+
+        /*------------ For small screens------------*/
+
+        @media only screen and (max-width: 768px){
+
+             .box-area{
+                margin: 0 10px;
+
+             }
+             .left-box{
+                height: 100px;
+                overflow: hidden;
+             }
+             .right-box{
+                padding: 20px;
+             }
 
         }
-        .circle1{
-            left: -25px;
+
+        
+
+        @media (min-width: 769px) { 
+            #cpsulogoImage {
+                display: none !important; /* Default: Hidden */
+            }
         }
-        .circle2{
-            right: -25px;
+
+        @media (max-width: 768px) { 
+            #cpsulogoleftsideImage {
+                display: none !important; Ensure it's shown on mobile
+            }
         }
         #particles-js {
             position: fixed;
             width: 100%;
             height: 100%;
-            background-image: url('{{ asset('template/img/bg-campuswifi.png') }}');
+            /* background-image: url('{{ asset('template/img/bg-campuswifi.png') }}'); */
             background-repeat: no-repeat;
             background-size: cover;
             background-position: 100%;
-            /*z-index: -1;*/
+            z-index: -1;
         }
+
+        /* Numeric Keyboard Container */
+        .keyboard-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            border: 3px solid #007B3A;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            /* display: none; */
+
+            /* Animation properties */
+            opacity: 0;
+            transform: translate(-50%, 50px);
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .keyboard-container.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+            pointer-events: auto;
+        }
+
+        /* Key Buttons */
+        .key-btn {
+            width: 50px;
+            height: 50px;
+            font-size: 1.6rem;
+            text-align: center;
+            cursor: pointer;
+            background: #007B3A;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        .key-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Control Buttons (Backspace & Clear) */
+        .key-control {
+            background: #DC3545;
+        }
+
+        .key-control:hover {
+            background: #c82333;
+        }
+
+        .key-control-dash {
+            background: #e9b10a;
+        }
+
+        .key-control-dash:hover {
+            background: #e9b10a;
+        }
+
+        .key-letter {
+            background: #6c757d;
+        }
+
+        .key-letter:hover {
+            background: #6c757d;
+        }
+
+        /* Hide Keyboard on Mobile */
+        @media (max-width: 768px) {
+            .keyboard-container {
+                display: none !important;
+            }
+        }
+
     </style>
 </head>
-
-<body class="hold-transition layout-top-nav layout-navbar-fixed">
-
-    <div class="wrapper">
-        <div id="particles-js"></div>
-        <nav class="main-header navbar navbar-expand-md border-bottom-0" style="background-color: #134c2c">
-            <div class="container-fluid">
-                <a href="" class="navbar-brand" style="color: #fff;font-family: Courier;">
-                    CPSU CAMPUS WIFI
-                </a>
-                <div class="" style="z-index: 999">
-                    {{-- <img src="{{ asset('template/img/CPSU_L.png') }}" style="width:80px;" class="center-top"> --}}
+<body>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #04401f;">
+                <div id="particles-js"></div>
+                <div class="featured-image mb-3">
+                    <center><img src="{{ asset('template/img/cpsulogov4.png') }}" class="img-fluid" id="" style="width: 100px; padding-top: 0px;"></center>
+                    <p class="text-white" style="font-family: 'Courier New', Courier, monospace; font-weight: 600; font-size: 1.5em !important">Student Campus Wi-Fi</p>
                 </div>
+                <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join and experienced</br></small>
+                <center><img src="{{ asset('template/img/studwificonnect2.png') }}" class="img-fluid" id="cpsulogoleftsideImage" style="width: 80%; padding-top: 0px;"></center>
+            </div> 
+        
+            <div class="col-md-6 right-box">
+                <div class="row align-items-center">
+                    <div class="header-text mb-4 text-center">
+                        <img src="{{ asset('template/img/cpsulogov4.png') }}" style="width:100px; margin-top: -250px" id="cpsulogoImage">
+                        <h2>Hi, Cenphilian</h2>
+                        <p>Sign in to generate Voucher</p>
 
-                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="" role="button" style="color: #fff">
-                            <i class="fas fa-sign-out"></i> Logout 
-                        </a>
-                    </li> --}}
-                </ul>
-            </div>
-        </nav>
-
-        <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container-fluid" style="margin-top: auto">
-                    
-                </div>
-            </div>
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row" style="padding-top: 20px;">
-                        <div class="col-lg-3"></div>
-
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-4"></div>
-
-                        <div class="col-lg-4">
-                            <div class="card" style="background-color: #a7bca7 !important; border-radius: 10px !important;"> 
-                                <div class="card-body">
-                                    <div class="container">
-                                        <div class="">
-                                            <div class="">
-                                                <h3 class="card-title pt-2">
-                                                    <p class="login-box-msg" style="font-family: Courier;font-weight: bolder;font-size: 15pt;">
-                                                        Login here to generate Wi-Fi Voucher
-                                                    </p>
-                                                </h3>
-                                            </div>
-                                            <form action="{{route('postLogin')}}" method="post">
-                                                @csrf
-                                                
-                                                <div class="input-group mb-3">
-                                                    <input type="text" id="studID_no" name="stud_id" placeholder="Enter Student ID Number" class="form-control form-control-lg" autofocus="" required="">
-                                                    <div class="input-group-append" style="background-color: #fff; border-radius: 5px 5px 5px 5px">
-                                                        <div class="input-group-text">
-                                                            <span class="fas fa-id-card"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="input-group mb-3">
-                                                    <input type="password" id="password" name="password" placeholder="Password" class="form-control form-control-lg" required="">
-                                                    <div class="input-group-append" style="background-color: #fff; border-radius: 5px 5px 5px 5px">
-                                                        <div class="input-group-text">
-                                                            <span class="fas fa-lock"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="form-row">
-                                                        <div class="col-md-6">
-                                                            <button type="submit" class="btn btn-primary btn-block" style="">
-                                                                <i class="fas fa-check"></i> <b>Login</b>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <a href="{{ route('register') }}" class="btn btn-danger btn-block">
-                                                                <i class="fas fa-plus"></i> <b>Create Account</b>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <div class="coupon-row">
-                                            </div>
-                                            @include('students.partials.numpad_control')
-                                        </div>
-                                    </div>
-                                </div>
+                    </div>
+                    <form action="{{ route('postLogin') }}" method="post">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input type="text" name="studid" class="form-control form-control-lg bg-light fs-6" placeholder="Student ID number" id="studentIdInput">
+                        </div>
+                        <div class="input-group mb-1">
+                            <input type="password" name="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" id="studentPassInput">
+                        </div>
+                        <div class="input-group mb-5 d-flex justify-content-between">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="formCheck">
+                                <label for="formCheck" class="form-check-label text-secondary"><small>Show Password</small></label>
+                            </div>
+                            <div class="forgot">
+                                {{-- <small><a href="#">Forgot Password?</a></small> --}}
                             </div>
                         </div>
-                    </div>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-lg btn-success w-100 fs-6">Login</button>
+                        </div>
+                    </form>
                 </div>
-            </div>
+            </div> 
+            <span style="font-size: 9pt; text-align: center; margin-top: 10px;">Maintained and Managed by Management Information System Office (MISO) under the Leadership of Dr. Aladino C. Moraca.</span>
         </div>
     </div>
 
-    <script src="{{ asset('particles/particles.js') }}"></script>
-    <script src="{{ asset('particles/app.js') }}"></script>
+
+    <div id="numericKeyboard" class="keyboard-container">
+        <!-- Numeric Keys -->
+        <button class="key-btn" data-key="1">1</button>
+        <button class="key-btn" data-key="2">2</button>
+        <button class="key-btn" data-key="3">3</button>
+        <button class="key-btn" data-key="4">4</button>
+        <button class="key-btn" data-key="5">5</button>
+        <button class="key-btn" data-key="6">6</button>
+        <button class="key-btn" data-key="7">7</button>
+        <button class="key-btn" data-key="8">8</button>
+        <button class="key-btn" data-key="9">9</button>
+        <button class="key-btn" data-key="0">0</button>
+        <button class="key-btn key-control-dash" data-key="-">
+            <i class="fas fa-minus"></i>
+        </button>
+
+        <!-- Alphabetic Keys -->
+        <button class="key-btn key-letter" data-key="K">K</button>
+        <button class="key-btn key-letter" data-key="U">U</button>
+        <button class="key-btn key-letter" data-key="G">G</button>
+
+        <!-- Control Keys -->
+        <button class="key-btn key-control" data-key="backspace">
+            DEL
+        </button>
+    </div>
+
     <!-- jQuery -->
     <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('template/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('template/dist/js/adminlte.min.js') }}"></script>
-
-    <!-- jquery-validation -->
-    <script src="{{ asset('template/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('template/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+    <!-- Moment -->
+    <script src="{{ asset('template/plugins/moment/moment.min.js') }}"></script>
     <!-- Toastr -->
     <script src="{{ asset('template/plugins/toastr/toastr.min.js') }}"></script>
-    <!-- SweetAlert2 -->
-    <script src="{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-
-    @include('script.numpad')
-    @include('script.register_script')
+    <script src="{{ asset('particles/particles.js') }}"></script>
+    <script src="{{ asset('particles/app.js') }}"></script>
+    
 
     <script>
-        @if(Session::has('success'))
-            toastr.options = {
-                "closeButton":true,
-                "progressBar":true,
-                'positionClass': 'toast-bottom-right'
-            }
-            toastr.success("{{ session('success') }}")
-        @endif
-        @if(Session::has('error'))
-            toastr.options = {
-                "closeButton":true,
-                "progressBar":true,
-                'positionClass': 'toast-bottom-right'
-            }
-            toastr.error("{{ session('error') }}")
-        @endif
-    </script>
+        $(document).ready(function() {
+            @if(session('error'))
+                toastr.error("{{ session('error') }}", "Error", {
+                    closeButton: false,
+                    progressBar: true,
+                    positionClass: "toast-top-right",
+                    timeOut: 10000
+                });
+            @endif
 
-    <script>
-        document.getElementById("password").addEventListener("focus", function () {
-            currentInput = "password";
+            @if(session('success'))
+                toastr.success("{{ session('success') }}", "Success", {
+                    closeButton: false,
+                    progressBar: true,
+                    positionClass: "toast-top-right",
+                    timeOut: 10000
+                });
+            @endif
         });
     </script>
-
+    
     <script>
-        $(document).ready(function(){
-            $('#v1').click();
+        document.addEventListener('DOMContentLoaded', () => {
+            const keyboard = document.getElementById('numericKeyboard');
+            const studentIdInput = document.getElementById('studentIdInput');
+            const studentPassInput = document.getElementById('studentPassInput');
+
+            let activeInput = null;
+
+            // Show keyboard with animation
+            const showKeyboard = (inputField) => {
+                if (window.innerWidth >= 768) {
+                    keyboard.classList.add('show');
+                    activeInput = inputField;
+                }
+            };
+
+            studentIdInput.addEventListener('focus', () => showKeyboard(studentIdInput));
+            studentPassInput.addEventListener('focus', () => showKeyboard(studentPassInput));
+
+            // Hide keyboard with animation when clicking outside
+            document.addEventListener('click', (event) => {
+                if (
+                    !keyboard.contains(event.target) &&
+                    event.target !== studentIdInput &&
+                    event.target !== studentPassInput
+                ) {
+                    keyboard.classList.remove('show');
+                }
+            });
+
+            // Handle key clicks with event delegation
+            keyboard.addEventListener('click', (event) => {
+                let key = event.target.dataset.key || event.target.parentElement.dataset.key;
+                if (!key || !activeInput) return;
+
+                if (key.length === 1 || key === '-') {
+                    activeInput.value += key;
+                } 
+                else if (key === 'backspace') {
+                    activeInput.value = activeInput.value.slice(0, -1);
+                } 
+                else if (key === 'clear') {
+                    activeInput.value = '';
+                }
+            });
         });
     </script>
 </body>
 </html>
-   

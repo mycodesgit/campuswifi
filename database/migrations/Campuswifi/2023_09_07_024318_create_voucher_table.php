@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('voucher_code');
             $table->string('status');
-            $table->string('studID');
+            $table->integer('semester');
+            $table->string('schlyear');
             $table->timestamps();
         });
     }

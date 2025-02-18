@@ -17,8 +17,8 @@ class LoginAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('students')->check()) { 
-            if (!Auth::guard('students')->user()->isStudent()) {
+        if (Auth::guard('kioskstudent')->check()) { 
+            if (!Auth::guard('kioskstudent')->user()->role) {
                 return redirect()->route('studlogin')->with('error', 'You don\'t have access to this page');
             }
         }
