@@ -19,11 +19,25 @@ use App\Models\CampuswifiDB\Voucher;
 
 class StudentMainController extends Controller
 {
-    public function dashboard() {
+    public function dashboard() 
+    {
+        if (!Auth::guard('kioskstudent')->check()) {
+            return redirect()->route('studlogin')->with('error', 'Please log in first.');
+        }
+    
+        $user = Auth::guard('kioskstudent')->user();
+    
+        if (!$user || !$user->studid) {
+            return redirect()->route('studlogin')->with('error', 'Invalid user session.');
+        }
+    
         $studvouch = VoucherStud::join('voucher', 'studvoucherreg.vc_id', '=', 'voucher.id')
-                    ->where('stud_id', Auth::guard('kioskstudent')->user()->student->stud_id)->first();
+                    ->where('stud_id', $user->studid)
+                    ->first();
+    
         return view('students.layout.masterstudent', compact('studvouch'));
     }
+    
 
     public function generateVoucher(Request $request)
     {
