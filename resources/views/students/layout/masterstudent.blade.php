@@ -206,7 +206,7 @@
                                     <div class="container">
                                         <div id="voucher-section">
                                             @if(!isset($studvouch))
-                                            <button class="btn btn-success btn-block" id="generateVoucherBtn">Generate Voucher</button>
+                                                <button class="btn btn-success btn-block" id="generateVoucherBtn">Generate Voucher</button>
                                             @else
                                             <div class="coupon-card">
                                                 <img src="{{ asset('template/img/wifi.png') }}" class="logo">
