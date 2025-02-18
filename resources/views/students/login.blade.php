@@ -258,6 +258,8 @@
     <script src="{{ asset('template/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('particles/particles.js') }}"></script>
     <script src="{{ asset('particles/app.js') }}"></script>
+    <!-- Context -->
+    <script src="{{ asset('js/basic/contextmenu.js') }}"></script>
     
 
     <script>

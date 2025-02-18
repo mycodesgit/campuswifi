@@ -246,6 +246,8 @@
     <script src="{{ asset('template/plugins/toastr/toastr.min.js') }}"></script>
     <!-- SweetAlert2 -->
     <script src="{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <!-- Context -->
+    <script src="{{ asset('js/basic/contextmenu.js') }}"></script>
 
     <script>
         document.getElementById('generateVoucherBtn').addEventListener('click', function () {
