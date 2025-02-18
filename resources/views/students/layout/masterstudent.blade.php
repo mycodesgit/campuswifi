@@ -214,7 +214,7 @@
                                                 <div class="coupon-row">
                                                     <span id="cpnCode" style="color: black;">{{ $studvouch->voucher_code }}</span>
                                                 </div>
-                                                <p>Total Time: 30 Hours per day in this Semester</p>
+                                                <p>Total Time: 30 Minutes per day in this Semester</p>
                                                 <div class="circle1"></div>
                                                 <div class="circle2"></div>
                                             </div>
@@ -272,7 +272,7 @@
                             <div class="coupon-row">
                                 <span id="cpnCode" style="color: black;">${data.voucher_code}</span>
                             </div>
-                            <p>Total Time: 30 Hours per day in this Semester</p>
+                            <p>Total Time: 30 Minutes per day in this Semester</p>
                             <div class="circle1"></div>
                             <div class="circle2"></div>
                         </div>`;
