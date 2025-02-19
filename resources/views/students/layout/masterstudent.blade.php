@@ -111,7 +111,7 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            background-image: url('{{ asset('template/img/bg-campuswifinew.png') }}');
+            background-image: url('{{ asset('template/img/bg-campwifi.png') }}');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: 100%;
