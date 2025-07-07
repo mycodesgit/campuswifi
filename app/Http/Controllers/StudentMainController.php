@@ -43,7 +43,7 @@ class StudentMainController extends Controller
     {
         $user = Auth::guard('kioskstudent')->user();
 
-        $voucher = Voucher::where('status', 1)->first();
+        $voucher = Voucher::where('status', 1)->where('semester', '=', '1')->where('schlyear', '=', '2025-2026')->first();
 
         if (!$voucher) {
             return response()->json(['error' => 'No available vouchers'], 404);
@@ -56,8 +56,8 @@ class StudentMainController extends Controller
             'fullname' => Auth::guard('kioskstudent')->user()->student->fname . ', ' . Auth::guard('kioskstudent')->user()->student->lname,
             'vc_id' => $voucher->id,
             'role' => $user->role,
-            'schlyear' => '2024-2025', // Adjust dynamically if needed
-            'semester' => '2' // Adjust dynamically if needed
+            'schlyear' => '2025-2026', // Adjust dynamically if needed
+            'semester' => '1' // Adjust dynamically if needed
         ]);
 
         return response()->json(['voucher_code' => $voucher->voucher_code], 200);
