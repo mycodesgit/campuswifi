@@ -43,7 +43,7 @@ class StudentMainController extends Controller
     {
         $user = Auth::guard('kioskstudent')->user();
 
-        $voucher = Voucher::where('status', 1)->where('semester', '=', '1')->where('schlyear', '=', '2025-2026')->first();
+        $voucher = Voucher::where('status', 1)->where('semester', '=', '2')->where('schlyear', '=', '2025-2026')->first();
 
         if (!$voucher) {
             return response()->json(['error' => 'No available vouchers'], 404);
